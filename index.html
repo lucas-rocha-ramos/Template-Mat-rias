@@ -338,20 +338,20 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* ===== PERFIL - IGUAL AO DOWNLOAD ===== */
+        /* ===== PERFIL - ALINHADO À ESQUERDA E MUITO PRÓXIMO AO TEXTO ===== */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             background: #ffffff;
-            padding: 5px 0 0px 0;
+            padding: 2px 0 0px 5px;
             overflow: hidden;
         }
 
         .post-profile img {
-            width: 25%;
-            max-width: 120px;
+            width: 20%;
+            max-width: 80px;
             height: auto;
             display: block;
             object-fit: contain;
@@ -359,7 +359,7 @@
         }
 
         .post-content {
-            padding: 2px 1rem 0.4rem;
+            padding: 0px 1rem 0.4rem;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -373,6 +373,7 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            padding-left: 0px;
         }
 
         .post-text b, .post-text strong {
@@ -455,28 +456,28 @@
             height: 1350px;
         }
 
-        /* ===== PERFIL NO DOWNLOAD ===== */
+        /* ===== PERFIL NO DOWNLOAD - ALINHADO À ESQUERDA E PRÓXIMO ===== */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             background: #ffffff;
-            padding: 5px 0 0px 0;
+            padding: 2px 0 0px 15px;
             overflow: hidden;
         }
 
         .download-profile img {
-            width: 25%;
-            max-width: 270px;
+            width: 15%;
+            max-width: 160px;
             height: auto;
             display: block;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         .download-content {
-            padding: 2px 100px 20px;
+            padding: 0px 50px 20px 50px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -490,6 +491,7 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            padding-left: 0px;
         }
 
         .download-text b, .download-text strong {
@@ -541,7 +543,7 @@
         }
 
         #downloadContainer1350 .download-profile img {
-            max-width: 230px;
+            max-width: 130px;
         }
 
         .hidden {
@@ -575,11 +577,11 @@
                         <i class="fas fa-check-circle"></i> perfil.png
                     </span>
                     <span style="font-size: 0.8rem; color: #5a6b7e; margin-left: auto;">
-                        <i class="fas fa-info-circle"></i> Pequeno, acima do texto
+                        <i class="fas fa-info-circle"></i> Alinhado à esquerda
                     </span>
                 </div>
                 <div class="profile-size-info">
-                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (25% da largura)
+                    <i class="fas fa-arrows-alt"></i> Alinhado à esquerda, muito próximo ao texto
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -693,8 +695,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (25% da largura), 
-        bem próximo ao texto. A imagem da matéria mantém a proporção original (sem deformar).
+        <i class="fas fa-arrow-down"></i> O perfil é exibido <strong>alinhado à esquerda</strong> e <strong>muito próximo ao texto</strong> (≈0,4mm).
+        A imagem da matéria mantém a proporção original (sem deformar).
     </div>
 </div>
 
@@ -752,8 +754,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const materiaImg1350 = document.getElementById('materiaImg1350');
         const postContent1080 = document.getElementById('postContent1080');
         const postContent1350 = document.getElementById('postContent1350');
-        const profilePreview1080 = document.getElementById('profilePreview1080');
-        const profilePreview1350 = document.getElementById('profilePreview1350');
 
         // Download
         const downloadText1080 = document.getElementById('downloadText1080');
@@ -764,8 +764,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const downloadContent1350 = document.getElementById('downloadContent1350');
         const downloadContainer1080 = document.getElementById('downloadContainer1080');
         const downloadContainer1350 = document.getElementById('downloadContainer1350');
-        const downloadProfile1080 = document.getElementById('downloadProfile1080');
-        const downloadProfile1350 = document.getElementById('downloadProfile1350');
 
         let materiaDataUrl = null;
 
@@ -841,21 +839,12 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
         function handleAvatarError() {
             avatarError.classList.add('show');
-            // Fallback com texto
-            const fallback = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23e8ecf1'/%3E%3Ctext x='200' y='115' font-size='28' text-anchor='middle' fill='%235a6b7e' font-family='Arial'%3Eperfil.png%3C/text%3E%3C/svg%3E";
-            profilePreview1080.src = fallback;
-            profilePreview1350.src = fallback;
-            downloadProfile1080.src = fallback;
-            downloadProfile1350.src = fallback;
         }
 
         function checkProfile() {
             const img = new Image();
             img.onload = () => avatarError.classList.remove('show');
-            img.onerror = () => {
-                avatarError.classList.add('show');
-                handleAvatarError();
-            };
+            img.onerror = () => avatarError.classList.add('show');
             img.src = 'perfil.png';
         }
 
@@ -864,7 +853,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             statusMsg.classList.remove('show');
 
             try {
-                // Aguarda todas as imagens carregarem
                 const images = container.querySelectorAll('img');
                 await Promise.all(Array.from(images).map(img => {
                     if (img.complete && img.naturalWidth > 0) return Promise.resolve();
@@ -875,7 +863,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                     });
                 }));
 
-                // Aguarda renderização
                 await new Promise(resolve => setTimeout(resolve, 300));
 
                 const canvas = await html2canvas(container, {
@@ -960,7 +947,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com prévia igual ao download');
+        console.log('Gerador com perfil alinhado à esquerda e próximo ao texto');
     })();
 </script>
 
