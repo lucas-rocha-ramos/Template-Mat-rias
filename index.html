@@ -279,7 +279,7 @@
             margin-top: 0.8rem;
         }
 
-        /* ===== PREVIEW ===== */
+        /* Preview */
         .preview-section {
             display: flex;
             flex-direction: column;
@@ -320,7 +320,6 @@
             background: #fafcff;
         }
 
-        /* ===== IMAGEM FINAL - TAMANHO EXATO ===== */
         .post-image {
             width: 100%;
             max-width: 280px;
@@ -339,7 +338,6 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* ===== ESTRUTURA DO POST (FIEL À REFERÊNCIA) ===== */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
@@ -356,6 +354,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .post-text {
@@ -365,7 +364,6 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            flex: 1;
         }
 
         .post-text b, .post-text strong {
@@ -425,7 +423,7 @@
             color: #1a5fb4;
         }
 
-        /* ===== VERSÃO PARA DOWNLOAD (TAMANHO EXATO) ===== */
+        /* ===== CONTAINERS PARA DOWNLOAD ===== */
         #downloadContainer1080,
         #downloadContainer1350 {
             position: absolute;
@@ -456,20 +454,20 @@
         }
 
         .download-content {
-            padding: 30px 40px 20px;
+            padding: 30px 45px 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .download-text {
-            font-size: 28px;
-            line-height: 1.5;
+            font-size: 30px;
+            line-height: 1.6;
             color: #121e2e;
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            flex: 1;
         }
 
         .download-text b, .download-text strong {
@@ -478,7 +476,7 @@
         }
 
         .download-materia {
-            margin-top: 15px;
+            margin-top: 20px;
             flex-shrink: 0;
         }
 
@@ -487,14 +485,14 @@
             border-radius: 12px;
             display: block;
             border: 1px solid #e8ecf2;
-            max-height: 400px;
+            max-height: 380px;
             object-fit: cover;
         }
 
         .download-footer {
             border-top: 2px solid #e8ecf2;
-            padding: 15px 40px;
-            font-size: 18px;
+            padding: 15px 45px;
+            font-size: 20px;
             color: #5a6b7e;
             display: flex;
             justify-content: space-between;
@@ -504,16 +502,12 @@
 
         .download-footer i {
             color: #1a5fb4;
-            font-size: 20px;
-            margin-right: 8px;
-        }
-
-        #downloadContainer1080 .download-text {
-            font-size: 32px;
+            font-size: 22px;
+            margin-right: 10px;
         }
 
         #downloadContainer1350 .download-text {
-            font-size: 28px;
+            font-size: 26px;
         }
 
         #downloadContainer1350 .download-materia img {
@@ -531,7 +525,6 @@
     <h1><i class="fas fa-image"></i> Gerador de Posts · Chico Guarnieri</h1>
 
     <div class="grid-2">
-        <!-- PAINEL -->
         <div class="control-panel">
             <h2><i class="fas fa-pen-fancy"></i> Editar Conteúdo</h2>
 
@@ -542,12 +535,12 @@
                         <i class="fas fa-check-circle"></i> perfil.png
                     </span>
                     <span style="font-size: 0.8rem; color: #5a6b7e; margin-left: auto;">
-                        <i class="fas fa-info-circle"></i> Mesma pasta do index.html
+                        <i class="fas fa-info-circle"></i> Mesma pasta
                     </span>
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
-                    <strong>perfil.png</strong> não encontrado. Coloque no mesmo diretório.
+                    <strong>perfil.png</strong> não encontrado.
                 </div>
             </div>
 
@@ -601,7 +594,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             </div>
         </div>
 
-        <!-- PRÉ-VISUALIZAÇÕES -->
+        <!-- PREVIEWS -->
         <div class="preview-section">
             <div class="card-preview">
                 <div class="card-header">
@@ -613,7 +606,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                         <div class="post-profile">
                             <img id="profilePreview1080" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
                         </div>
-                        <div class="post-content">
+                        <div class="post-content" id="postContent1080">
                             <div class="post-text" id="textPreview1080">📌 TRABALHO QUE AVANÇA</div>
                             <div class="post-materia" id="materiaPreview1080">
                                 <img id="materiaImg1080" src="" alt="Matéria" style="display:none;">
@@ -637,7 +630,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                         <div class="post-profile">
                             <img id="profilePreview1350" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
                         </div>
-                        <div class="post-content">
+                        <div class="post-content" id="postContent1350">
                             <div class="post-text" id="textPreview1350">📌 TRABALHO QUE AVANÇA</div>
                             <div class="post-materia" id="materiaPreview1350">
                                 <img id="materiaImg1350" src="" alt="Matéria" style="display:none;">
@@ -654,17 +647,17 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil é fixo (perfil.png). Envie a imagem da matéria e edite o texto.
-        Clique nos botões verdes para baixar nos tamanhos exatos 1080x1920 e 1080x1350.
+        <i class="fas fa-arrow-down"></i> O sistema <strong>centraliza automaticamente</strong> o conteúdo entre o perfil e o rodapé.
+        Envie a imagem da matéria e edite o texto. Clique nos botões verdes para baixar.
     </div>
 </div>
 
-<!-- ===== CONTAINERS PARA DOWNLOAD (TAMANHO EXATO) ===== -->
+<!-- ===== DOWNLOAD CONTAINERS ===== -->
 <div id="downloadContainer1080">
     <div class="download-profile">
         <img id="downloadProfile1080" src="perfil.png" alt="Perfil">
     </div>
-    <div class="download-content">
+    <div class="download-content" id="downloadContent1080">
         <div class="download-text" id="downloadText1080">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1080">
             <img id="downloadMateriaImg1080" src="" alt="Matéria" style="display:none;">
@@ -680,7 +673,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     <div class="download-profile">
         <img id="downloadProfile1350" src="perfil.png" alt="Perfil">
     </div>
-    <div class="download-content">
+    <div class="download-content" id="downloadContent1350">
         <div class="download-text" id="downloadText1350">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1350">
             <img id="downloadMateriaImg1350" src="" alt="Matéria" style="display:none;">
@@ -706,17 +699,21 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const loading = document.getElementById('loading');
         const avatarError = document.getElementById('avatarError');
 
-        // Preview elements
+        // Preview
         const textPreview1080 = document.getElementById('textPreview1080');
         const textPreview1350 = document.getElementById('textPreview1350');
         const materiaImg1080 = document.getElementById('materiaImg1080');
         const materiaImg1350 = document.getElementById('materiaImg1350');
+        const postContent1080 = document.getElementById('postContent1080');
+        const postContent1350 = document.getElementById('postContent1350');
 
-        // Download elements
+        // Download
         const downloadText1080 = document.getElementById('downloadText1080');
         const downloadText1350 = document.getElementById('downloadText1350');
         const downloadMateriaImg1080 = document.getElementById('downloadMateriaImg1080');
         const downloadMateriaImg1350 = document.getElementById('downloadMateriaImg1350');
+        const downloadContent1080 = document.getElementById('downloadContent1080');
+        const downloadContent1350 = document.getElementById('downloadContent1350');
         const downloadContainer1080 = document.getElementById('downloadContainer1080');
         const downloadContainer1350 = document.getElementById('downloadContainer1350');
 
@@ -741,15 +738,15 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             const rawText = textInput.value;
             const htmlText = renderTextWithBold(rawText);
 
-            // Atualiza previews
+            // Preview
             textPreview1080.innerHTML = htmlText || ' ';
             textPreview1350.innerHTML = htmlText || ' ';
 
-            // Atualiza containers de download
+            // Download
             downloadText1080.innerHTML = htmlText || ' ';
             downloadText1350.innerHTML = htmlText || ' ';
 
-            // Atualiza imagem da matéria
+            // Matéria
             if (materiaDataUrl) {
                 materiaImg1080.src = materiaDataUrl;
                 materiaImg1080.style.display = 'block';
@@ -766,6 +763,12 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                 downloadMateriaImg1350.style.display = 'none';
             }
 
+            // Centralizar conteúdo com flex
+            postContent1080.style.justifyContent = 'center';
+            postContent1350.style.justifyContent = 'center';
+            downloadContent1080.style.justifyContent = 'center';
+            downloadContent1350.style.justifyContent = 'center';
+
             statusMsg.classList.add('show');
             statusText.textContent = 'Pré-visualização atualizada';
             setTimeout(() => statusMsg.classList.remove('show'), 1800);
@@ -775,7 +778,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             avatarError.classList.add('show');
         }
 
-        // Verifica se perfil.png existe
         function checkProfile() {
             const img = new Image();
             img.onload = () => avatarError.classList.remove('show');
@@ -783,13 +785,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             img.src = 'perfil.png';
         }
 
-        // Download com html2canvas (tamanho exato)
         async function downloadImage(container, filename) {
             loading.classList.add('show');
             statusMsg.classList.remove('show');
 
             try {
-                // Aguarda imagens carregarem
                 const images = container.querySelectorAll('img');
                 await Promise.all(Array.from(images).map(img => {
                     if (img.complete && img.naturalWidth > 0) return Promise.resolve();
@@ -882,7 +882,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com tamanhos exatos 1080x1920 e 1080x1350');
+        console.log('Gerador com centralização automática');
     })();
 </script>
 
