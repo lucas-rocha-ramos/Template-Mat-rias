@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de posts · Chico Guarnieri</title>
-    <!-- Font Awesome para ícones -->
+    <title>Gerador de Posts · Chico Guarnieri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,8 +13,8 @@
         }
 
         body {
-            background: #f5f7fa;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #e8ecf1;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,29 +23,28 @@
         }
 
         .app {
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
             background: white;
-            border-radius: 2.5rem;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
             padding: 2rem 2rem 2.5rem;
-            transition: 0.2s;
         }
 
         h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #1e293b;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0a1a2b;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.8rem;
-            letter-spacing: -0.3px;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
         }
 
         h1 i {
-            color: #2563eb;
-            font-size: 1.9rem;
+            color: #1a5fb4;
+            font-size: 1.8rem;
         }
 
         .grid-2 {
@@ -55,7 +53,7 @@
             gap: 2rem;
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 860px) {
             .grid-2 {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
@@ -64,22 +62,24 @@
 
         /* Painel de controle */
         .control-panel {
-            background: #f8fafc;
-            border-radius: 1.8rem;
-            padding: 1.6rem 1.5rem;
-            border: 1px solid #e9edf2;
+            background: #f7f9fc;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #dde3ec;
         }
 
         .control-panel h2 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: #0f172a;
+            color: #1e2a3a;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            border-bottom: 2px solid #dbe0e8;
-            padding-bottom: 0.7rem;
+            gap: 0.5rem;
+            border-bottom: 2px solid #dde3ec;
+            padding-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .field {
@@ -88,49 +88,50 @@
 
         .field label {
             display: block;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #334155;
-            margin-bottom: 0.3rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e2a3a;
+            margin-bottom: 0.4rem;
         }
 
         .field textarea {
             width: 100%;
-            min-height: 160px;
+            min-height: 200px;
             padding: 0.9rem 1rem;
-            border-radius: 1.2rem;
-            border: 1px solid #d1d9e6;
+            border-radius: 1rem;
+            border: 1px solid #cbd5e1;
             font-family: inherit;
             font-size: 0.95rem;
             resize: vertical;
             background: white;
             transition: 0.15s;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .field textarea:focus {
-            outline: 2px solid #2563eb;
+            outline: 2px solid #1a5fb4;
             outline-offset: 2px;
             border-color: transparent;
         }
 
         .field .hint {
             font-size: 0.75rem;
-            color: #64748b;
+            color: #5a6b7e;
             margin-top: 0.3rem;
             display: flex;
-            gap: 0.6rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
         .field .hint i {
             margin-right: 0.2rem;
+            color: #1a5fb4;
         }
 
         .file-upload {
             background: white;
-            border-radius: 1.4rem;
-            border: 1px dashed #a0b8d4;
+            border-radius: 1.2rem;
+            border: 1px dashed #8fa3c0;
             padding: 0.6rem 1rem;
             display: flex;
             align-items: center;
@@ -140,8 +141,8 @@
         }
 
         .file-upload:hover {
-            border-color: #2563eb;
-            background: #f1f5ff;
+            border-color: #1a5fb4;
+            background: #f0f5ff;
         }
 
         .file-upload input[type="file"] {
@@ -150,33 +151,35 @@
             border: none;
             background: transparent;
             padding: 0.2rem 0;
+            min-width: 140px;
         }
 
         .file-upload input[type="file"]::file-selector-button {
-            background: #eef2f6;
+            background: #e3e8f0;
             border: none;
             padding: 0.4rem 1.2rem;
             border-radius: 2rem;
-            font-weight: 500;
-            color: #1e293b;
+            font-weight: 600;
+            color: #1a2a3a;
             margin-right: 0.8rem;
             cursor: pointer;
             transition: 0.15s;
+            font-size: 0.8rem;
         }
 
         .file-upload input[type="file"]::file-selector-button:hover {
-            background: #d9e2ef;
+            background: #cbd5e1;
         }
 
         .preview-name {
             font-weight: 500;
-            color: #0f172a;
-            font-size: 0.9rem;
+            color: #1a2a3a;
+            font-size: 0.85rem;
         }
 
         .btn-group {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
             margin-top: 1.8rem;
         }
@@ -188,7 +191,7 @@
             border-radius: 3rem;
             font-weight: 600;
             font-size: 0.9rem;
-            color: #1e293b;
+            color: #1e2a3a;
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
@@ -200,179 +203,37 @@
         }
 
         .btn-primary {
-            background: #2563eb;
-            border: 1px solid #2563eb;
+            background: #1a5fb4;
+            border: 1px solid #1a5fb4;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
-            border-color: #1d4ed8;
-            transform: scale(0.98);
+            background: #124a8a;
+            border-color: #124a8a;
+            transform: scale(0.97);
         }
 
         .btn-secondary {
-            background: #e9edf2;
-            border-color: #d1d9e6;
+            background: #eef2f7;
+            border-color: #cbd5e1;
         }
 
         .btn-secondary:hover {
-            background: #dce2eb;
+            background: #dde3ec;
         }
 
         .btn i {
             font-size: 1rem;
         }
 
-        /* preview cards */
-        .preview-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .card-preview {
-            background: #ffffff;
-            border-radius: 1.8rem;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e9edf2;
-            overflow: hidden;
-            transition: 0.2s;
-        }
-
-        .card-preview:hover {
-            border-color: #b8c9e0;
-        }
-
-        .card-header {
-            background: #f1f5f9;
-            padding: 0.7rem 1.2rem;
-            font-weight: 500;
-            color: #1e293b;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.9rem;
-        }
-
-        .card-header span {
-            background: #dbe0e8;
-            padding: 0.1rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .card-body {
-            padding: 1.2rem 1.2rem 1.5rem;
-            display: flex;
-            justify-content: center;
-            background: #fafcff;
-        }
-
-        .mockup-image {
-            width: 100%;
-            max-width: 260px;
-            aspect-ratio: 9 / 16;
-            background: white;
-            border-radius: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 1.2rem 0.9rem;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eef2f6;
-            transition: 0.1s;
-        }
-
-        .mockup-image.wide {
-            max-width: 300px;
-            aspect-ratio: 4 / 5; /* 1080x1350 ~ 4:5 */
-        }
-
-        .mockup-avatar {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .mockup-avatar img {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #d9e2ef;
-            border: 2px solid white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-        }
-
-        .mockup-avatar .names {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mockup-avatar .names .name {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #0a0f1a;
-            line-height: 1.2;
-        }
-
-        .mockup-avatar .names .handle {
-            font-size: 0.7rem;
-            color: #4b5b6e;
-        }
-
-        .mockup-text {
-            flex: 1;
-            font-size: 0.8rem;
-            line-height: 1.5;
-            color: #161f2e;
-            white-space: pre-wrap;
-            word-break: break-word;
-            margin-bottom: 0.8rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 0.2rem;
-        }
-
-        .mockup-text b, .mockup-text strong {
-            font-weight: 700;
-            color: #0c1a2b;
-        }
-
-        .mockup-footer {
-            border-top: 1px solid #e9edf2;
-            padding-top: 0.6rem;
-            font-size: 0.6rem;
-            color: #4b5b6e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .mockup-footer i {
-            color: #2563eb;
-            font-size: 0.8rem;
-        }
-
-        .dimension-badge {
-            background: #eef2f6;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.6rem;
-            font-weight: 600;
-        }
-
         .status-msg {
             margin-top: 0.8rem;
             padding: 0.6rem 1rem;
             border-radius: 3rem;
-            background: #ecfdf3;
-            color: #0a6b3b;
-            border: 1px solid #b3e0c9;
+            background: #e6f4ea;
+            color: #0a5a30;
+            border: 1px solid #b8d9c4;
             font-size: 0.85rem;
             display: none;
             align-items: center;
@@ -383,33 +244,197 @@
             display: flex;
         }
 
+        /* Preview cards */
+        .preview-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .card-preview {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: 1px solid #dde3ec;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: #f1f5f9;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            color: #1a2a3a;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #dde3ec;
+            font-size: 0.85rem;
+        }
+
+        .card-header span {
+            background: #dde3ec;
+            padding: 0.1rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1a2a3a;
+        }
+
+        .card-body {
+            padding: 1.2rem 1.2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            background: #fafcff;
+        }
+
+        /* ===== MOCKUP FIEL AO ORIGINAL ===== */
+        .mockup-image {
+            width: 100%;
+            max-width: 260px;
+            aspect-ratio: 9 / 16;
+            background: #ffffff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            padding: 1.4rem 1.2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e8ecf2;
+            transition: 0.1s;
+        }
+
+        .mockup-image.wide {
+            max-width: 300px;
+            aspect-ratio: 4 / 5;
+        }
+
+        /* Avatar + nome */
+        .mockup-avatar {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+        }
+
+        .mockup-avatar img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #d9e2ef;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            flex-shrink: 0;
+        }
+
+        .mockup-avatar .names {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .mockup-avatar .names .name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0a1628;
+        }
+
+        .mockup-avatar .names .handle {
+            font-size: 0.7rem;
+            color: #5a6b7e;
+        }
+
+        /* Texto do post - ESTILO EXATAMENTE COMO NA IMAGEM */
+        .mockup-text {
+            flex: 1;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            color: #121e2e;
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin-bottom: 0.8rem;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 0.2rem;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        .mockup-text b, .mockup-text strong {
+            font-weight: 700;
+            color: #0a1628;
+        }
+
+        /* Linha divisória + nome/@ repetido no final (igual à imagem) */
+        .mockup-divider {
+            border-top: 1px solid #e8ecf2;
+            padding-top: 0.7rem;
+            margin-top: 0.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .mockup-divider .name-line {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #0a1628;
+        }
+
+        .mockup-divider .handle-line {
+            font-size: 0.65rem;
+            color: #5a6b7e;
+        }
+
+        .mockup-footer {
+            border-top: 1px solid #e8ecf2;
+            padding-top: 0.5rem;
+            margin-top: 0.4rem;
+            font-size: 0.55rem;
+            color: #5a6b7e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mockup-footer i {
+            color: #1a5fb4;
+            font-size: 0.7rem;
+        }
+
+        .dimension-badge {
+            background: #eef2f7;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.55rem;
+            font-weight: 700;
+        }
+
         .footnote {
             font-size: 0.8rem;
-            color: #64748b;
-            margin-top: 1.5rem;
+            color: #5a6b7e;
+            margin-top: 1.8rem;
             text-align: center;
-            border-top: 1px solid #e9edf2;
+            border-top: 1px solid #dde3ec;
             padding-top: 1.2rem;
         }
 
         .footnote i {
-            color: #2563eb;
+            color: #1a5fb4;
         }
     </style>
 </head>
 <body>
 
 <div class="app">
-    <h1><i class="fas fa-image"></i> Gerador · Chico Guarnieri</h1>
+    <h1><i class="fas fa-image"></i> Gerador de Posts · Chico Guarnieri</h1>
 
     <div class="grid-2">
-        <!-- painel de edição -->
+        <!-- PAINEL DE EDIÇÃO -->
         <div class="control-panel">
-            <h2><i class="fas fa-pen-fancy"></i> Conteúdo</h2>
+            <h2><i class="fas fa-pen-fancy"></i> Editar Conteúdo</h2>
 
             <div class="field">
                 <label for="textInput"><i class="fas fa-paragraph"></i> Texto do post</label>
-                <textarea id="textInput" placeholder="Digite o texto... use **negrito** ou &lt;b&gt;texto&lt;/b&gt;">📌 TRABALHO QUE AVANÇA
+                <textarea id="textInput" placeholder="Digite o texto... use <b>negrito</b> ou **negrito**">📌 TRABALHO QUE AVANÇA
 
 Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça compromissos.
 
@@ -417,7 +442,8 @@ Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça co
 
 Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.</textarea>
                 <div class="hint">
-                    <span><i class="fas fa-bold"></i> Use <b>texto</b> ou &lt;b&gt; ... &lt;/b&gt; para negrito</span>
+                    <span><i class="fas fa-bold"></i> Use <b>texto</b> ou <code>&lt;b&gt;...&lt;/b&gt;</code> para negrito</span>
+                    <span><i class="fas fa-undo-alt"></i> O nome/@ são fixos no rodapé</span>
                 </div>
             </div>
 
@@ -427,8 +453,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                     <input type="file" id="avatarInput" accept="image/png">
                     <span id="fileName" class="preview-name">Nenhum arquivo</span>
                 </div>
-                <div style="margin-top: 0.3rem; font-size: 0.75rem; color: #475569;">
-                    <i class="fas fa-info-circle"></i> PNG com transparência, recomendado 200x200px
+                <div style="margin-top: 0.3rem; font-size: 0.7rem; color: #5a6b7e;">
+                    <i class="fas fa-info-circle"></i> PNG com fundo transparente, 200x200px recomendado
                 </div>
             </div>
 
@@ -442,8 +468,9 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             </div>
         </div>
 
-        <!-- previews -->
+        <!-- PRÉ-VISUALIZAÇÕES -->
         <div class="preview-section">
+            <!-- 1080x1920 -->
             <div class="card-preview">
                 <div class="card-header">
                     <span><i class="fas fa-mobile-alt"></i> 1080x1920</span>
@@ -459,6 +486,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                             </div>
                         </div>
                         <div class="mockup-text" id="textPreview1080">📌 TRABALHO QUE AVANÇA</div>
+                        <!-- Nome e @ repetidos no final, igual à imagem -->
+                        <div class="mockup-divider">
+                            <span class="name-line">Chico Guarnieri</span>
+                            <span class="handle-line">@chicoguarnierimt</span>
+                        </div>
                         <div class="mockup-footer">
                             <span><i class="fas fa-map-pin"></i> Norte do estado</span>
                             <span class="dimension-badge">1080x1920</span>
@@ -467,6 +499,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                 </div>
             </div>
 
+            <!-- 1080x1350 -->
             <div class="card-preview">
                 <div class="card-header">
                     <span><i class="fas fa-tablet-alt"></i> 1080x1350</span>
@@ -482,6 +515,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                             </div>
                         </div>
                         <div class="mockup-text" id="textPreview1350">📌 TRABALHO QUE AVANÇA</div>
+                        <!-- Nome e @ repetidos no final, igual à imagem -->
+                        <div class="mockup-divider">
+                            <span class="name-line">Chico Guarnieri</span>
+                            <span class="handle-line">@chicoguarnierimt</span>
+                        </div>
                         <div class="mockup-footer">
                             <span><i class="fas fa-map-pin"></i> Norte do estado</span>
                             <span class="dimension-badge">1080x1350</span>
@@ -493,7 +531,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> Edite o texto, insira sua imagem PNG e clique em "Atualizar prévia" — os dois formatos são gerados dinamicamente.
+        <i class="fas fa-arrow-down"></i> Edite o texto, insira sua imagem PNG e clique em "Atualizar prévia" — os dois formatos são gerados com o layout fiel à imagem original.
     </div>
 </div>
 
@@ -513,7 +551,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const avatarImg1080 = document.getElementById('avatarImg1080');
         const avatarImg1350 = document.getElementById('avatarImg1350');
 
-        // texto padrão
         const DEFAULT_TEXT = `📌 TRABALHO QUE AVANÇA
 
 Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça compromissos.
@@ -522,15 +559,11 @@ Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça co
 
 Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.`;
 
-        // Avatar padrão (SVG data uri)
         const DEFAULT_AVATAR = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23d1d9e6'/%3E%3Ctext x='50' y='58' font-size='40' text-anchor='middle' fill='%235b6b7e'%3E👤%3C/text%3E%3C/svg%3E";
 
-        // Helper: converter texto com <b> para negrito (preserva)
         function renderTextWithBold(text) {
             if (!text) return '';
-            // substitui <b> e </b> por <strong> para preview
             let html = text.replace(/<b>/gi, '<strong>').replace(/<\/b>/gi, '</strong>');
-            // também converte ** para <strong> (caso o usuário use markdown)
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             return html;
         }
@@ -541,7 +574,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             preview1080.innerHTML = htmlText || ' ';
             preview1350.innerHTML = htmlText || ' ';
 
-            // Mostrar status
             statusMsg.classList.add('show');
             statusText.textContent = 'Pré-visualização atualizada';
             setTimeout(() => {
@@ -549,13 +581,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             }, 1800);
         }
 
-        // Atualizar avatar nos dois previews
         function updateAvatar(src) {
             avatarImg1080.src = src;
             avatarImg1350.src = src;
         }
 
-        // Carregar arquivo PNG
         function handleAvatarFile(file) {
             if (!file) return;
             if (file.type !== 'image/png') {
@@ -586,7 +616,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             e.preventDefault();
             textInput.value = DEFAULT_TEXT;
             updatePreviews();
-            // reset avatar para padrão
             updateAvatar(DEFAULT_AVATAR);
             avatarInput.value = '';
             fileName.textContent = 'Nenhum arquivo';
@@ -603,12 +632,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             }
         });
 
-        // Inicializar com o texto padrão
+        // Inicializar
         textInput.value = DEFAULT_TEXT;
         updatePreviews();
-        // avatar padrão já está setado no HTML
 
-        // também atualizar ao digitar com atalho (ctrl+enter)
+        // Atalho Ctrl+Enter
         textInput.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
@@ -616,8 +644,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             }
         });
 
-        // suporte para drag and drop? (simplificado)
-        console.log('Gerador pronto · dois formatos 1080x1920 e 1080x1350');
+        console.log('Gerador fiel à imagem original · 1080x1920 e 1080x1350');
     })();
 </script>
 
