@@ -338,28 +338,28 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* PERFIL AJUSTADO - PEQUENO E PRÓXIMO AO TEXTO */
+        /* ===== PERFIL - IGUAL AO DOWNLOAD ===== */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 2px 0 0px 0;
+            padding: 5px 0 0px 0;
             overflow: hidden;
         }
 
         .post-profile img {
-            width: 45%;
+            width: 25%;
             max-width: 120px;
             height: auto;
             display: block;
             object-fit: contain;
-            border-radius: 0.3rem;
+            border-radius: 4px;
         }
 
         .post-content {
-            padding: 0.2rem 1rem 0.4rem;
+            padding: 2px 1rem 0.4rem;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -455,7 +455,7 @@
             height: 1350px;
         }
 
-        /* PERFIL NO DOWNLOAD - PEQUENO E PRÓXIMO AO TEXTO */
+        /* ===== PERFIL NO DOWNLOAD ===== */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
@@ -579,7 +579,7 @@
                     </span>
                 </div>
                 <div class="profile-size-info">
-                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (≈25-45% da largura)
+                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (25% da largura)
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -693,7 +693,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (≈25-45% da largura), 
+        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (25% da largura), 
         bem próximo ao texto. A imagem da matéria mantém a proporção original (sem deformar).
     </div>
 </div>
@@ -752,6 +752,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const materiaImg1350 = document.getElementById('materiaImg1350');
         const postContent1080 = document.getElementById('postContent1080');
         const postContent1350 = document.getElementById('postContent1350');
+        const profilePreview1080 = document.getElementById('profilePreview1080');
+        const profilePreview1350 = document.getElementById('profilePreview1350');
 
         // Download
         const downloadText1080 = document.getElementById('downloadText1080');
@@ -775,32 +777,6 @@ Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça co
 
 Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.`;
 
-        // Converte imagem para base64 para garantir que seja capturada
-        function imageToBase64(imgElement) {
-            return new Promise((resolve) => {
-                if (imgElement.complete && imgElement.naturalWidth > 0) {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = imgElement.naturalWidth;
-                    canvas.height = imgElement.naturalHeight;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(imgElement, 0, 0);
-                    resolve(canvas.toDataURL('image/png'));
-                } else {
-                    imgElement.onload = function() {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = imgElement.naturalWidth;
-                        canvas.height = imgElement.naturalHeight;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(imgElement, 0, 0);
-                        resolve(canvas.toDataURL('image/png'));
-                    };
-                    imgElement.onerror = function() {
-                        resolve(null);
-                    };
-                }
-            });
-        }
-
         function renderTextWithBold(text) {
             if (!text) return '';
             let html = text.replace(/<b>/gi, '<strong>').replace(/<\/b>/gi, '</strong>');
@@ -813,12 +789,12 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             const htmlText = renderTextWithBold(rawText);
 
             // Preview
-            textPreview1080.innerHTML = htmlText || ' ';
-            textPreview1350.innerHTML = htmlText || ' ';
+            textPreview1080.innerHTML = htmlText || '&nbsp;';
+            textPreview1350.innerHTML = htmlText || '&nbsp;';
 
             // Download
-            downloadText1080.innerHTML = htmlText || ' ';
-            downloadText1350.innerHTML = htmlText || ' ';
+            downloadText1080.innerHTML = htmlText || '&nbsp;';
+            downloadText1350.innerHTML = htmlText || '&nbsp;';
 
             // Matéria
             if (materiaDataUrl) {
@@ -865,12 +841,21 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
         function handleAvatarError() {
             avatarError.classList.add('show');
+            // Fallback com texto
+            const fallback = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23e8ecf1'/%3E%3Ctext x='200' y='115' font-size='28' text-anchor='middle' fill='%235a6b7e' font-family='Arial'%3Eperfil.png%3C/text%3E%3C/svg%3E";
+            profilePreview1080.src = fallback;
+            profilePreview1350.src = fallback;
+            downloadProfile1080.src = fallback;
+            downloadProfile1350.src = fallback;
         }
 
         function checkProfile() {
             const img = new Image();
             img.onload = () => avatarError.classList.remove('show');
-            img.onerror = () => avatarError.classList.add('show');
+            img.onerror = () => {
+                avatarError.classList.add('show');
+                handleAvatarError();
+            };
             img.src = 'perfil.png';
         }
 
@@ -879,28 +864,19 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             statusMsg.classList.remove('show');
 
             try {
-                // Aguarda todas as imagens carregarem completamente
+                // Aguarda todas as imagens carregarem
                 const images = container.querySelectorAll('img');
                 await Promise.all(Array.from(images).map(img => {
-                    return new Promise((resolve) => {
-                        if (img.complete && img.naturalWidth > 0) {
-                            resolve();
-                        } else {
-                            img.onload = () => resolve();
-                            img.onerror = () => resolve();
-                            // Força recarregamento
-                            if (img.src && !img.src.startsWith('data:')) {
-                                const src = img.src;
-                                img.src = '';
-                                img.src = src + '?t=' + Date.now();
-                            }
-                            setTimeout(resolve, 3000);
-                        }
+                    if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+                    return new Promise(resolve => {
+                        img.onload = resolve;
+                        img.onerror = resolve;
+                        setTimeout(resolve, 2000);
                     });
                 }));
 
-                // Aguarda um pouco mais para garantir renderização
-                await new Promise(resolve => setTimeout(resolve, 500));
+                // Aguarda renderização
+                await new Promise(resolve => setTimeout(resolve, 300));
 
                 const canvas = await html2canvas(container, {
                     scale: 1,
@@ -909,14 +885,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                     backgroundColor: '#ffffff',
                     logging: false,
                     width: container.scrollWidth,
-                    height: container.scrollHeight,
-                    onclone: function(doc) {
-                        // Garante que as imagens estão visíveis no clone
-                        const imgs = doc.querySelectorAll('img');
-                        imgs.forEach(img => {
-                            img.style.display = 'block';
-                        });
-                    }
+                    height: container.scrollHeight
                 });
 
                 const link = document.createElement('a');
@@ -991,7 +960,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil pequeno e próximo ao texto - corrigido');
+        console.log('Gerador com prévia igual ao download');
     })();
 </script>
 
