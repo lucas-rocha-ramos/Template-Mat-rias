@@ -338,15 +338,24 @@
             aspect-ratio: 4 / 5;
         }
 
+        /* PERFIL COM TAMANHO FIXO */
         .post-profile {
             width: 100%;
+            height: auto;
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            padding: 0;
+            overflow: hidden;
         }
 
         .post-profile img {
             width: 100%;
             height: auto;
             display: block;
+            object-fit: contain;
+            max-height: 180px;
         }
 
         .post-content {
@@ -374,6 +383,8 @@
         .post-materia {
             margin-top: 0.5rem;
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
         }
 
         .post-materia img {
@@ -381,8 +392,8 @@
             border-radius: 0.4rem;
             display: block;
             border: 1px solid #e8ecf2;
-            max-height: 140px;
-            object-fit: cover;
+            max-height: 120px;
+            object-fit: contain;
         }
 
         .post-footer {
@@ -442,15 +453,24 @@
             height: 1350px;
         }
 
+        /* PERFIL COM TAMANHO FIXO 979.99 x 525 */
         .download-profile {
             width: 100%;
+            height: auto;
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            padding: 0;
+            overflow: hidden;
         }
 
         .download-profile img {
             width: 100%;
             height: auto;
+            max-height: 525px;
             display: block;
+            object-fit: contain;
         }
 
         .download-content {
@@ -478,15 +498,17 @@
         .download-materia {
             margin-top: 20px;
             flex-shrink: 0;
+            display: flex;
+            justify-content: center;
         }
 
         .download-materia img {
             width: 100%;
+            max-height: 380px;
             border-radius: 12px;
             display: block;
             border: 1px solid #e8ecf2;
-            max-height: 380px;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .download-footer {
@@ -517,6 +539,17 @@
         .hidden {
             display: none !important;
         }
+
+        /* Info do tamanho do perfil */
+        .profile-size-info {
+            font-size: 0.7rem;
+            color: #5a6b7e;
+            margin-top: 0.2rem;
+            padding: 0.3rem 0.8rem;
+            background: #eef2f7;
+            border-radius: 2rem;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -535,8 +568,11 @@
                         <i class="fas fa-check-circle"></i> perfil.png
                     </span>
                     <span style="font-size: 0.8rem; color: #5a6b7e; margin-left: auto;">
-                        <i class="fas fa-info-circle"></i> Mesma pasta
+                        <i class="fas fa-info-circle"></i> 979.99 x 525 px
                     </span>
+                </div>
+                <div class="profile-size-info">
+                    <i class="fas fa-arrows-alt"></i> Tamanho fixo: 979.99 × 525 px
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -549,6 +585,9 @@
                 <div class="file-upload">
                     <input type="file" id="materiaInput" accept="image/*">
                     <span id="materiaFileName" class="preview-name">Nenhuma imagem</span>
+                </div>
+                <div style="font-size: 0.7rem; color: #5a6b7e; margin-top: 0.2rem;">
+                    <i class="fas fa-info-circle"></i> A imagem será ajustada mantendo proporção (sem deformar)
                 </div>
             </div>
 
@@ -573,7 +612,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
             <div style="margin-top: 1.2rem; border-top: 2px solid #dde3ec; padding-top: 1rem;">
                 <label style="font-weight: 600; font-size: 0.85rem; color: #1e2a3a; display: block; margin-bottom: 0.5rem;">
-                    <i class="fas fa-download"></i> Baixar imagens (tamanho exato)
+                    <i class="fas fa-download"></i> Baixar imagens
                 </label>
                 <div class="btn-download-group">
                     <button class="btn btn-success" id="download1080">
@@ -647,8 +686,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O sistema <strong>centraliza automaticamente</strong> o conteúdo entre o perfil e o rodapé.
-        Envie a imagem da matéria e edite o texto. Clique nos botões verdes para baixar.
+        <i class="fas fa-arrow-down"></i> O perfil tem tamanho fixo (979.99 × 525 px). 
+        A imagem da matéria é ajustada sem deformar. Conteúdo centralizado automaticamente.
     </div>
 </div>
 
@@ -763,7 +802,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                 downloadMateriaImg1350.style.display = 'none';
             }
 
-            // Centralizar conteúdo com flex
+            // Centralizar
             postContent1080.style.justifyContent = 'center';
             postContent1350.style.justifyContent = 'center';
             downloadContent1080.style.justifyContent = 'center';
@@ -882,7 +921,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com centralização automática');
+        console.log('Gerador com perfil 979.99x525 e imagem sem deformar');
     })();
 </script>
 
