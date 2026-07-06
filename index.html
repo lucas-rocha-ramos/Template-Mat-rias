@@ -338,15 +338,12 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* PERFIL COM TAMANHO FIXO */
         .post-profile {
             width: 100%;
-            height: auto;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 0;
             overflow: hidden;
         }
 
@@ -385,6 +382,7 @@
             flex-shrink: 0;
             display: flex;
             justify-content: center;
+            width: 100%;
         }
 
         .post-materia img {
@@ -394,6 +392,7 @@
             border: 1px solid #e8ecf2;
             max-height: 120px;
             object-fit: contain;
+            background: #fafcff;
         }
 
         .post-footer {
@@ -453,15 +452,12 @@
             height: 1350px;
         }
 
-        /* PERFIL COM TAMANHO FIXO 979.99 x 525 */
         .download-profile {
             width: 100%;
-            height: auto;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 0;
             overflow: hidden;
         }
 
@@ -500,6 +496,7 @@
             flex-shrink: 0;
             display: flex;
             justify-content: center;
+            width: 100%;
         }
 
         .download-materia img {
@@ -509,6 +506,7 @@
             display: block;
             border: 1px solid #e8ecf2;
             object-fit: contain;
+            background: #fafcff;
         }
 
         .download-footer {
@@ -540,7 +538,6 @@
             display: none !important;
         }
 
-        /* Info do tamanho do perfil */
         .profile-size-info {
             font-size: 0.7rem;
             color: #5a6b7e;
@@ -549,6 +546,14 @@
             background: #eef2f7;
             border-radius: 2rem;
             display: inline-block;
+        }
+
+        /* Dimensão da imagem da matéria no preview */
+        .materia-dimension {
+            font-size: 0.6rem;
+            color: #8a9aae;
+            text-align: center;
+            margin-top: 0.2rem;
         }
     </style>
 </head>
@@ -587,7 +592,7 @@
                     <span id="materiaFileName" class="preview-name">Nenhuma imagem</span>
                 </div>
                 <div style="font-size: 0.7rem; color: #5a6b7e; margin-top: 0.2rem;">
-                    <i class="fas fa-info-circle"></i> A imagem será ajustada mantendo proporção (sem deformar)
+                    <i class="fas fa-info-circle"></i> A imagem será ajustada mantendo a proporção original (sem deformar)
                 </div>
             </div>
 
@@ -687,7 +692,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
     <div class="footnote">
         <i class="fas fa-arrow-down"></i> O perfil tem tamanho fixo (979.99 × 525 px). 
-        A imagem da matéria é ajustada sem deformar. Conteúdo centralizado automaticamente.
+        A imagem da matéria é ajustada <strong>mantendo a proporção</strong> (sem deformar).
+        Conteúdo centralizado automaticamente.
     </div>
 </div>
 
@@ -785,16 +791,31 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             downloadText1080.innerHTML = htmlText || ' ';
             downloadText1350.innerHTML = htmlText || ' ';
 
-            // Matéria
+            // Matéria - usando object-fit: contain para não deformar
             if (materiaDataUrl) {
                 materiaImg1080.src = materiaDataUrl;
                 materiaImg1080.style.display = 'block';
+                materiaImg1080.style.objectFit = 'contain';
+                materiaImg1080.style.width = '100%';
+                materiaImg1080.style.height = 'auto';
+                
                 materiaImg1350.src = materiaDataUrl;
                 materiaImg1350.style.display = 'block';
+                materiaImg1350.style.objectFit = 'contain';
+                materiaImg1350.style.width = '100%';
+                materiaImg1350.style.height = 'auto';
+                
                 downloadMateriaImg1080.src = materiaDataUrl;
                 downloadMateriaImg1080.style.display = 'block';
+                downloadMateriaImg1080.style.objectFit = 'contain';
+                downloadMateriaImg1080.style.width = '100%';
+                downloadMateriaImg1080.style.height = 'auto';
+                
                 downloadMateriaImg1350.src = materiaDataUrl;
                 downloadMateriaImg1350.style.display = 'block';
+                downloadMateriaImg1350.style.objectFit = 'contain';
+                downloadMateriaImg1350.style.width = '100%';
+                downloadMateriaImg1350.style.height = 'auto';
             } else {
                 materiaImg1080.style.display = 'none';
                 materiaImg1350.style.display = 'none';
@@ -921,7 +942,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil 979.99x525 e imagem sem deformar');
+        console.log('Gerador com imagem da matéria sem deformar (object-fit: contain)');
     })();
 </script>
 
