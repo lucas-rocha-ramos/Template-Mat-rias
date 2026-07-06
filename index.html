@@ -338,20 +338,20 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* ===== PERFIL AJUSTADO - PEQUENO E PRÓXIMO AO TEXTO ===== */
+        /* PERFIL AJUSTADO - PEQUENO E PRÓXIMO AO TEXTO */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 2px 0 0px 0;  /* MUITO PRÓXIMO AO TEXTO */
+            padding: 2px 0 0px 0;
             overflow: hidden;
         }
 
         .post-profile img {
-            width: 45%;           /* MENOR - 45% da largura */
-            max-width: 120px;     /* TAMANHO MÁXIMO REDUZIDO */
+            width: 45%;
+            max-width: 120px;
             height: auto;
             display: block;
             object-fit: contain;
@@ -359,7 +359,7 @@
         }
 
         .post-content {
-            padding: 0.2rem 1rem 0.4rem;  /* ESPAÇO MÍNIMO ENTRE PERFIL E TEXTO */
+            padding: 0.2rem 1rem 0.4rem;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -455,20 +455,20 @@
             height: 1350px;
         }
 
-        /* ===== PERFIL NO DOWNLOAD - PEQUENO E PRÓXIMO AO TEXTO ===== */
+        /* PERFIL NO DOWNLOAD - PEQUENO E PRÓXIMO AO TEXTO */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 5px 0 0px 0;    /* MUITO PRÓXIMO AO TEXTO */
+            padding: 5px 0 0px 0;
             overflow: hidden;
         }
 
         .download-profile img {
-            width: 25%;             /* MENOR - 25% da largura */
-            max-width: 270px;       /* TAMANHO MÁXIMO REDUZIDO */
+            width: 25%;
+            max-width: 270px;
             height: auto;
             display: block;
             object-fit: contain;
@@ -476,7 +476,7 @@
         }
 
         .download-content {
-            padding: 2px 100px 20px;  /* ESPAÇO MÍNIMO ENTRE PERFIL E TEXTO */
+            padding: 2px 100px 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -701,12 +701,12 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 <!-- ===== DOWNLOAD CONTAINERS ===== -->
 <div id="downloadContainer1080">
     <div class="download-profile">
-        <img id="downloadProfile1080" src="perfil.png" alt="Perfil">
+        <img id="downloadProfile1080" src="perfil.png" alt="Perfil" crossorigin="anonymous">
     </div>
     <div class="download-content" id="downloadContent1080">
         <div class="download-text" id="downloadText1080">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1080">
-            <img id="downloadMateriaImg1080" src="" alt="Matéria" style="display:none;">
+            <img id="downloadMateriaImg1080" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
         </div>
     </div>
     <div class="download-footer">
@@ -717,12 +717,12 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
 <div id="downloadContainer1350">
     <div class="download-profile">
-        <img id="downloadProfile1350" src="perfil.png" alt="Perfil">
+        <img id="downloadProfile1350" src="perfil.png" alt="Perfil" crossorigin="anonymous">
     </div>
     <div class="download-content" id="downloadContent1350">
         <div class="download-text" id="downloadText1350">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1350">
-            <img id="downloadMateriaImg1350" src="" alt="Matéria" style="display:none;">
+            <img id="downloadMateriaImg1350" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
         </div>
     </div>
     <div class="download-footer">
@@ -762,6 +762,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const downloadContent1350 = document.getElementById('downloadContent1350');
         const downloadContainer1080 = document.getElementById('downloadContainer1080');
         const downloadContainer1350 = document.getElementById('downloadContainer1350');
+        const downloadProfile1080 = document.getElementById('downloadProfile1080');
+        const downloadProfile1350 = document.getElementById('downloadProfile1350');
 
         let materiaDataUrl = null;
 
@@ -772,6 +774,32 @@ Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça co
 <b>Educação</b>, segurança pública e novos investimentos marcaram a agenda cumprida pelo deputado estadual <b>Chico Guarnieri</b> (PSDB), nesta quinta-feira (2), ao lado do governador Otaviano Pivetta, em Nova Mutum, Lucas do Rio Verde e Sorriso.
 
 Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.`;
+
+        // Converte imagem para base64 para garantir que seja capturada
+        function imageToBase64(imgElement) {
+            return new Promise((resolve) => {
+                if (imgElement.complete && imgElement.naturalWidth > 0) {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = imgElement.naturalWidth;
+                    canvas.height = imgElement.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(imgElement, 0, 0);
+                    resolve(canvas.toDataURL('image/png'));
+                } else {
+                    imgElement.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = imgElement.naturalWidth;
+                        canvas.height = imgElement.naturalHeight;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(imgElement, 0, 0);
+                        resolve(canvas.toDataURL('image/png'));
+                    };
+                    imgElement.onerror = function() {
+                        resolve(null);
+                    };
+                }
+            });
+        }
 
         function renderTextWithBold(text) {
             if (!text) return '';
@@ -851,15 +879,28 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             statusMsg.classList.remove('show');
 
             try {
+                // Aguarda todas as imagens carregarem completamente
                 const images = container.querySelectorAll('img');
                 await Promise.all(Array.from(images).map(img => {
-                    if (img.complete && img.naturalWidth > 0) return Promise.resolve();
-                    return new Promise(resolve => {
-                        img.onload = resolve;
-                        img.onerror = resolve;
-                        setTimeout(resolve, 2000);
+                    return new Promise((resolve) => {
+                        if (img.complete && img.naturalWidth > 0) {
+                            resolve();
+                        } else {
+                            img.onload = () => resolve();
+                            img.onerror = () => resolve();
+                            // Força recarregamento
+                            if (img.src && !img.src.startsWith('data:')) {
+                                const src = img.src;
+                                img.src = '';
+                                img.src = src + '?t=' + Date.now();
+                            }
+                            setTimeout(resolve, 3000);
+                        }
                     });
                 }));
+
+                // Aguarda um pouco mais para garantir renderização
+                await new Promise(resolve => setTimeout(resolve, 500));
 
                 const canvas = await html2canvas(container, {
                     scale: 1,
@@ -868,7 +909,14 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                     backgroundColor: '#ffffff',
                     logging: false,
                     width: container.scrollWidth,
-                    height: container.scrollHeight
+                    height: container.scrollHeight,
+                    onclone: function(doc) {
+                        // Garante que as imagens estão visíveis no clone
+                        const imgs = doc.querySelectorAll('img');
+                        imgs.forEach(img => {
+                            img.style.display = 'block';
+                        });
+                    }
                 });
 
                 const link = document.createElement('a');
@@ -943,7 +991,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil pequeno e próximo ao texto');
+        console.log('Gerador com perfil pequeno e próximo ao texto - corrigido');
     })();
 </script>
 
