@@ -338,15 +338,21 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* ===== PERFIL - PEQUENO, ESQUERDA, PRÓXIMO AO TEXTO ===== */
+        .post-content {
+            padding: 0.8rem 0.8rem 0.4rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ===== PERFIL - DENTRO DO CONTEÚDO, PRÓXIMO AO TEXTO ===== */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: flex-start;
-            background: #ffffff;
-            padding: 0px 0 0px 8px;
-            overflow: hidden;
+            margin-bottom: 0.8rem;
         }
 
         .post-profile img {
@@ -356,14 +362,6 @@
             display: block;
             object-fit: contain;
             border-radius: 3px;
-        }
-
-        .post-content {
-            padding: 0px 0.8rem 0.4rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .post-text {
@@ -381,7 +379,7 @@
         }
 
         .post-materia {
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
@@ -407,7 +405,7 @@
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
-            margin-top: 0.2rem;
+            margin-top: auto;
         }
 
         .post-footer i {
@@ -455,15 +453,21 @@
             height: 1350px;
         }
 
-        /* ===== PERFIL NO DOWNLOAD - PEQUENO, ESQUERDA, PRÓXIMO ===== */
+        .download-content {
+            padding: 45px 45px 20px 45px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ===== PERFIL NO DOWNLOAD - DENTRO DO CONTEÚDO ===== */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: flex-start;
-            background: #ffffff;
-            padding: 0px 0 0px 20px;
-            overflow: hidden;
+            margin-bottom: 25px;
         }
 
         .download-profile img {
@@ -473,14 +477,6 @@
             display: block;
             object-fit: contain;
             border-radius: 6px;
-        }
-
-        .download-content {
-            padding: 0px 45px 20px 45px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .download-text {
@@ -498,7 +494,7 @@
         }
 
         .download-materia {
-            margin-top: 15px;
+            margin-top: 25px;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
@@ -524,6 +520,7 @@
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
+            margin-top: auto;
         }
 
         .download-footer i {
@@ -579,7 +576,7 @@
                     </span>
                 </div>
                 <div class="profile-size-info">
-                    <i class="fas fa-arrows-alt"></i> Alinhado à esquerda, muito próximo ao texto
+                    <i class="fas fa-arrows-alt"></i> Alinhado à esquerda, agrupado com o texto
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -649,10 +646,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                 </div>
                 <div class="card-body">
                     <div class="post-image" id="preview1080">
-                        <div class="post-profile">
-                            <img id="profilePreview1080" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
-                        </div>
+                        <!-- Perfil e texto agrupados dentro de post-content -->
                         <div class="post-content" id="postContent1080">
+                            <div class="post-profile">
+                                <img id="profilePreview1080" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
+                            </div>
                             <div class="post-text" id="textPreview1080">📌 TRABALHO QUE AVANÇA</div>
                             <div class="post-materia" id="materiaPreview1080">
                                 <img id="materiaImg1080" src="" alt="Matéria" style="display:none;">
@@ -673,10 +671,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                 </div>
                 <div class="card-body">
                     <div class="post-image wide" id="preview1350">
-                        <div class="post-profile">
-                            <img id="profilePreview1350" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
-                        </div>
+                        <!-- Perfil e texto agrupados dentro de post-content -->
                         <div class="post-content" id="postContent1350">
+                            <div class="post-profile">
+                                <img id="profilePreview1350" src="perfil.png" alt="Perfil" onerror="handleAvatarError()">
+                            </div>
                             <div class="post-text" id="textPreview1350">📌 TRABALHO QUE AVANÇA</div>
                             <div class="post-materia" id="materiaPreview1350">
                                 <img id="materiaImg1350" src="" alt="Matéria" style="display:none;">
@@ -693,17 +692,18 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil é exibido <strong>pequeno, alinhado à esquerda</strong> e <strong>muito próximo ao texto</strong>.
+        <i class="fas fa-arrow-down"></i> O perfil é exibido <strong>pequeno, alinhado à esquerda</strong> e <strong>agrupado com o texto</strong>.
         A imagem da matéria mantém a proporção original (sem deformar).
     </div>
 </div>
 
 <!-- ===== DOWNLOAD CONTAINERS ===== -->
 <div id="downloadContainer1080">
-    <div class="download-profile">
-        <img id="downloadProfile1080" src="perfil.png" alt="Perfil" crossorigin="anonymous">
-    </div>
+    <!-- Perfil movido para DENTRO do download-content -->
     <div class="download-content" id="downloadContent1080">
+        <div class="download-profile">
+            <img id="downloadProfile1080" src="perfil.png" alt="Perfil" crossorigin="anonymous">
+        </div>
         <div class="download-text" id="downloadText1080">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1080">
             <img id="downloadMateriaImg1080" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
@@ -716,10 +716,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 </div>
 
 <div id="downloadContainer1350">
-    <div class="download-profile">
-        <img id="downloadProfile1350" src="perfil.png" alt="Perfil" crossorigin="anonymous">
-    </div>
+    <!-- Perfil movido para DENTRO do download-content -->
     <div class="download-content" id="downloadContent1350">
+        <div class="download-profile">
+            <img id="downloadProfile1350" src="perfil.png" alt="Perfil" crossorigin="anonymous">
+        </div>
         <div class="download-text" id="downloadText1350">📌 TRABALHO QUE AVANÇA</div>
         <div class="download-materia" id="downloadMateria1350">
             <img id="downloadMateriaImg1350" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
@@ -765,13 +766,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
         let materiaDataUrl = null;
 
-        const DEFAULT_TEXT = `📌 TRABALHO QUE AVANÇA
-
-Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça compromissos.
-
-<b>Educação</b>, segurança pública e novos investimentos marcaram a agenda cumprida pelo deputado estadual <b>Chico Guarnieri</b> (PSDB), nesta quinta-feira (2), ao lado do governador Otaviano Pivetta, em Nova Mutum, Lucas do Rio Verde e Sorriso.
-
-Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.`;
+        const DEFAULT_TEXT = `📌 TRABALHO QUE AVANÇA\n\nEm agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça compromissos.\n\n<b>Educação</b>, segurança pública e novos investimentos marcaram a agenda cumprida pelo deputado estadual <b>Chico Guarnieri</b> (PSDB), nesta quinta-feira (2), ao lado do governador Otaviano Pivetta, em Nova Mutum, Lucas do Rio Verde e Sorriso.\n\nAo longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.`;
 
         function renderTextWithBold(text) {
             if (!text) return '';
@@ -945,7 +940,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil pequeno, esquerda e próximo ao texto');
+        console.log('Gerador com perfil agrupado e próximo ao texto');
     })();
 </script>
 
