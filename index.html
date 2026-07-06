@@ -338,28 +338,28 @@
             aspect-ratio: 4 / 5;
         }
 
-        /* PERFIL MENOR - AGORA COMO AVATAR */
+        /* ===== PERFIL AJUSTADO - PEQUENO E PRÓXIMO AO TEXTO ===== */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 8px 0 4px 0;
+            padding: 2px 0 0px 0;  /* MUITO PRÓXIMO AO TEXTO */
             overflow: hidden;
         }
 
         .post-profile img {
-            width: 60%;
-            max-width: 160px;
+            width: 45%;           /* MENOR - 45% da largura */
+            max-width: 120px;     /* TAMANHO MÁXIMO REDUZIDO */
             height: auto;
             display: block;
             object-fit: contain;
-            border-radius: 0.4rem;
+            border-radius: 0.3rem;
         }
 
         .post-content {
-            padding: 0.4rem 1rem 0.4rem;
+            padding: 0.2rem 1rem 0.4rem;  /* ESPAÇO MÍNIMO ENTRE PERFIL E TEXTO */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -455,28 +455,28 @@
             height: 1350px;
         }
 
-        /* PERFIL MENOR NO DOWNLOAD */
+        /* ===== PERFIL NO DOWNLOAD - PEQUENO E PRÓXIMO AO TEXTO ===== */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
-            padding: 20px 0 10px 0;
+            padding: 5px 0 0px 0;    /* MUITO PRÓXIMO AO TEXTO */
             overflow: hidden;
         }
 
         .download-profile img {
-            width: 35%;
-            max-width: 380px;
+            width: 25%;             /* MENOR - 25% da largura */
+            max-width: 270px;       /* TAMANHO MÁXIMO REDUZIDO */
             height: auto;
             display: block;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         .download-content {
-            padding: 5px 100px 20px;
+            padding: 2px 100px 20px;  /* ESPAÇO MÍNIMO ENTRE PERFIL E TEXTO */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -541,7 +541,7 @@
         }
 
         #downloadContainer1350 .download-profile img {
-            max-width: 320px;
+            max-width: 230px;
         }
 
         .hidden {
@@ -575,11 +575,11 @@
                         <i class="fas fa-check-circle"></i> perfil.png
                     </span>
                     <span style="font-size: 0.8rem; color: #5a6b7e; margin-left: auto;">
-                        <i class="fas fa-info-circle"></i> Menor, acima do texto
+                        <i class="fas fa-info-circle"></i> Pequeno, acima do texto
                     </span>
                 </div>
                 <div class="profile-size-info">
-                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (≈35% da largura)
+                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (≈25-45% da largura)
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -693,8 +693,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (≈35% da largura), 
-        próximo ao texto. A imagem da matéria mantém a proporção original (sem deformar).
+        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (≈25-45% da largura), 
+        bem próximo ao texto. A imagem da matéria mantém a proporção original (sem deformar).
     </div>
 </div>
 
@@ -943,7 +943,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil menor e próximo ao texto');
+        console.log('Gerador com perfil pequeno e próximo ao texto');
     })();
 </script>
 
