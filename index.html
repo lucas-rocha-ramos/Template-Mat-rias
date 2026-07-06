@@ -338,25 +338,28 @@
             aspect-ratio: 4 / 5;
         }
 
+        /* PERFIL MENOR - AGORA COMO AVATAR */
         .post-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
+            padding: 8px 0 4px 0;
             overflow: hidden;
         }
 
         .post-profile img {
-            width: 100%;
+            width: 60%;
+            max-width: 160px;
             height: auto;
             display: block;
             object-fit: contain;
-            max-height: 180px;
+            border-radius: 0.4rem;
         }
 
         .post-content {
-            padding: 0.8rem 1rem 0.4rem;
+            padding: 0.4rem 1rem 0.4rem;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -378,7 +381,7 @@
         }
 
         .post-materia {
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
@@ -404,7 +407,7 @@
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
 
         .post-footer i {
@@ -452,25 +455,28 @@
             height: 1350px;
         }
 
+        /* PERFIL MENOR NO DOWNLOAD */
         .download-profile {
             width: 100%;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
             background: #ffffff;
+            padding: 20px 0 10px 0;
             overflow: hidden;
         }
 
         .download-profile img {
-            width: 100%;
+            width: 35%;
+            max-width: 380px;
             height: auto;
-            max-height: 525px;
             display: block;
             object-fit: contain;
+            border-radius: 12px;
         }
 
         .download-content {
-            padding: 30px 45px 20px;
+            padding: 15px 50px 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -492,7 +498,7 @@
         }
 
         .download-materia {
-            margin-top: 20px;
+            margin-top: 15px;
             flex-shrink: 0;
             display: flex;
             justify-content: center;
@@ -511,7 +517,7 @@
 
         .download-footer {
             border-top: 2px solid #e8ecf2;
-            padding: 15px 45px;
+            padding: 15px 50px;
             font-size: 20px;
             color: #5a6b7e;
             display: flex;
@@ -534,6 +540,10 @@
             max-height: 300px;
         }
 
+        #downloadContainer1350 .download-profile img {
+            max-width: 320px;
+        }
+
         .hidden {
             display: none !important;
         }
@@ -546,14 +556,6 @@
             background: #eef2f7;
             border-radius: 2rem;
             display: inline-block;
-        }
-
-        /* Dimensão da imagem da matéria no preview */
-        .materia-dimension {
-            font-size: 0.6rem;
-            color: #8a9aae;
-            text-align: center;
-            margin-top: 0.2rem;
         }
     </style>
 </head>
@@ -573,11 +575,11 @@
                         <i class="fas fa-check-circle"></i> perfil.png
                     </span>
                     <span style="font-size: 0.8rem; color: #5a6b7e; margin-left: auto;">
-                        <i class="fas fa-info-circle"></i> 979.99 x 525 px
+                        <i class="fas fa-info-circle"></i> Menor, acima do texto
                     </span>
                 </div>
                 <div class="profile-size-info">
-                    <i class="fas fa-arrows-alt"></i> Tamanho fixo: 979.99 × 525 px
+                    <i class="fas fa-arrows-alt"></i> Exibido em tamanho reduzido (≈35% da largura)
                 </div>
                 <div id="avatarError" class="error-avatar">
                     <i class="fas fa-exclamation-triangle"></i> 
@@ -691,9 +693,8 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
     </div>
 
     <div class="footnote">
-        <i class="fas fa-arrow-down"></i> O perfil tem tamanho fixo (979.99 × 525 px). 
-        A imagem da matéria é ajustada <strong>mantendo a proporção</strong> (sem deformar).
-        Conteúdo centralizado automaticamente.
+        <i class="fas fa-arrow-down"></i> O perfil é exibido em <strong>tamanho reduzido</strong> (≈35% da largura), 
+        próximo ao texto. A imagem da matéria mantém a proporção original (sem deformar).
     </div>
 </div>
 
@@ -791,7 +792,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             downloadText1080.innerHTML = htmlText || ' ';
             downloadText1350.innerHTML = htmlText || ' ';
 
-            // Matéria - usando object-fit: contain para não deformar
+            // Matéria
             if (materiaDataUrl) {
                 materiaImg1080.src = materiaDataUrl;
                 materiaImg1080.style.display = 'block';
@@ -942,7 +943,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com imagem da matéria sem deformar (object-fit: contain)');
+        console.log('Gerador com perfil menor e próximo ao texto');
     })();
 </script>
 
