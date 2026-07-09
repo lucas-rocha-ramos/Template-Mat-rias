@@ -339,7 +339,7 @@
         }
 
         .post-content {
-            padding: 0.8rem 0.8rem 0.4rem;
+            padding: 0.8rem 0.8rem 2.5rem; /* Ajustado para deixar um espaço vazio na parte de baixo */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -396,31 +396,6 @@
             background: #fafcff;
         }
 
-        .post-footer {
-            border-top: 1px solid #e8ecf2;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.5rem;
-            color: #5a6b7e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-            margin-top: auto;
-        }
-
-        .post-footer i {
-            color: #1a5fb4;
-            font-size: 0.6rem;
-        }
-
-        .dimension-badge {
-            background: #eef2f7;
-            padding: 0.1rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.5rem;
-            font-weight: 700;
-        }
-
         .footnote {
             font-size: 0.8rem;
             color: #5a6b7e;
@@ -454,7 +429,7 @@
         }
 
         .download-content {
-            padding: 45px 45px 20px 45px;
+            padding: 45px 45px 160px 45px; /* Ajustado para deixar bastante espaço em branco na parte inferior da imagem real */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -509,24 +484,6 @@
             border: 1px solid #e8ecf2;
             object-fit: contain;
             background: #fafcff;
-        }
-
-        .download-footer {
-            border-top: 2px solid #e8ecf2;
-            padding: 15px 45px;
-            font-size: 18px;
-            color: #5a6b7e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-            margin-top: auto;
-        }
-
-        .download-footer i {
-            color: #1a5fb4;
-            font-size: 20px;
-            margin-right: 8px;
         }
 
         #downloadContainer1350 .download-text {
@@ -656,10 +613,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                                 <img id="materiaImg1080" src="" alt="Matéria" style="display:none;">
                             </div>
                         </div>
-                        <div class="post-footer">
-                            <span><i class="fas fa-map-pin"></i> Norte do estado</span>
-                            <span class="dimension-badge">1080x1920</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -681,10 +634,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                                 <img id="materiaImg1350" src="" alt="Matéria" style="display:none;">
                             </div>
                         </div>
-                        <div class="post-footer">
-                            <span><i class="fas fa-map-pin"></i> Norte do estado</span>
-                            <span class="dimension-badge">1080x1350</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -699,7 +648,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
 <!-- ===== DOWNLOAD CONTAINERS ===== -->
 <div id="downloadContainer1080">
-    <!-- Perfil movido para DENTRO do download-content -->
     <div class="download-content" id="downloadContent1080">
         <div class="download-profile">
             <img id="downloadProfile1080" src="perfil.png" alt="Perfil" crossorigin="anonymous">
@@ -709,14 +657,9 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             <img id="downloadMateriaImg1080" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
         </div>
     </div>
-    <div class="download-footer">
-        <span><i class="fas fa-map-pin"></i> Norte do estado</span>
-        <span>1080x1920</span>
-    </div>
 </div>
 
 <div id="downloadContainer1350">
-    <!-- Perfil movido para DENTRO do download-content -->
     <div class="download-content" id="downloadContent1350">
         <div class="download-profile">
             <img id="downloadProfile1350" src="perfil.png" alt="Perfil" crossorigin="anonymous">
@@ -725,10 +668,6 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         <div class="download-materia" id="downloadMateria1350">
             <img id="downloadMateriaImg1350" src="" alt="Matéria" style="display:none;" crossorigin="anonymous">
         </div>
-    </div>
-    <div class="download-footer">
-        <span><i class="fas fa-map-pin"></i> Norte do estado</span>
-        <span>1080x1350</span>
     </div>
 </div>
 
@@ -940,7 +879,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil 4x maior e próximo ao texto');
+        console.log('Gerador com perfil 4x maior e rodapé com espaço em branco');
     })();
 </script>
 
