@@ -212,6 +212,22 @@
         .btn-secondary:hover {
             background: #dde3ec;
         }
+        
+        .btn-bold {
+            background: #eef2f7; 
+            border: 1px solid #cbd5e1; 
+            padding: 0.3rem 0.8rem; 
+            border-radius: 0.5rem; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            color: #1a2a3a; 
+            transition: 0.2s;
+        }
+        
+        .btn-bold:hover {
+            background: #dde3ec;
+        }
 
         .btn i {
             font-size: 1rem;
@@ -371,6 +387,7 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            transition: font-size 0.2s;
         }
 
         .post-text b, .post-text strong {
@@ -461,6 +478,7 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            transition: font-size 0.2s;
         }
 
         .download-text b, .download-text strong {
@@ -511,6 +529,10 @@
             border-radius: 2rem;
             display: inline-block;
         }
+        
+        input[type=range] {
+            accent-color: #1a5fb4;
+        }
     </style>
 </head>
 <body>
@@ -552,17 +574,34 @@
                 </div>
             </div>
 
+            <!-- NOVO CONTROLE: Slider de Tamanho do Texto -->
             <div class="field">
-                <label for="textInput"><i class="fas fa-paragraph"></i> Texto do post</label>
+                <label for="textSize"><i class="fas fa-text-height"></i> Tamanho do Texto</label>
+                <input type="range" id="textSize" min="50" max="150" value="100" style="width: 100%; margin-bottom: 0.5rem;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #5a6b7e; font-weight: 500;">
+                    <span>Menor</span>
+                    <span id="textSizeVal">100%</span>
+                    <span>Maior</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <!-- NOVO CONTROLE: Botão de Negrito -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0.4rem;">
+                    <label for="textInput" style="margin-bottom: 0;"><i class="fas fa-paragraph"></i> Texto do post</label>
+                    <button type="button" id="btnBold" class="btn-bold" title="Selecione um texto e clique aqui">
+                        <i class="fas fa-bold"></i> Aplicar Negrito
+                    </button>
+                </div>
                 <textarea id="textInput">📌 TRABALHO QUE AVANÇA
 
 Em agenda pelo Norte do estado, Chico Guarnieri acompanha entregas e reforça compromissos.
 
-<b>Educação</b>, segurança pública e novos investimentos marcaram a agenda cumprida pelo deputado estadual <b>Chico Guarnieri</b> (PSDB), nesta quinta-feira (2), ao lado do governador Otaviano Pivetta, em Nova Mutum, Lucas do Rio Verde e Sorriso.
+Educação, segurança pública e novos investimentos marcaram a agenda cumprida pelo deputado estadual Chico Guarnieri (PSDB), nesta quinta-feira (2), ao lado do governador Otaviano Pivetta, em Nova Mutum, Lucas do Rio Verde e Sorriso.
 
 Ao longo do dia, a programação foi marcada por inaugurações, anúncios de investimentos e reuniões com lideranças.</textarea>
                 <div class="hint">
-                    <i class="fas fa-bold"></i> Use <b>texto</b> ou <code>&lt;b&gt;...&lt;/b&gt;</code> para negrito
+                    <i class="fas fa-info-circle"></i> Selecione uma palavra ou frase e clique no botão <b>Aplicar Negrito</b>.
                 </div>
             </div>
 
@@ -684,6 +723,11 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
         const statusText = document.getElementById('statusText');
         const loading = document.getElementById('loading');
         const avatarError = document.getElementById('avatarError');
+        
+        // Elementos Novos
+        const textSizeSlider = document.getElementById('textSize');
+        const textSizeVal = document.getElementById('textSizeVal');
+        const btnBold = document.getElementById('btnBold');
 
         // Preview
         const textPreview1080 = document.getElementById('textPreview1080');
@@ -718,13 +762,20 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             const rawText = textInput.value;
             const htmlText = renderTextWithBold(rawText);
 
-            // Preview
+            // Preview Text
             textPreview1080.innerHTML = htmlText || '&nbsp;';
             textPreview1350.innerHTML = htmlText || '&nbsp;';
 
-            // Download
+            // Download Text
             downloadText1080.innerHTML = htmlText || '&nbsp;';
             downloadText1350.innerHTML = htmlText || '&nbsp;';
+            
+            // Ajuste de Tamanho do Texto via Slider
+            const scale = parseInt(textSizeSlider.value) / 100;
+            textPreview1080.style.fontSize = (0.75 * scale) + 'rem';
+            textPreview1350.style.fontSize = (0.75 * scale) + 'rem';
+            downloadText1080.style.fontSize = (28 * scale) + 'px';
+            downloadText1350.style.fontSize = (24 * scale) + 'px';
 
             // Matéria
             if (materiaDataUrl) {
@@ -828,12 +879,40 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
 
         // Eventos
         updateBtn.addEventListener('click', updateAll);
+        
+        textSizeSlider.addEventListener('input', function() {
+            textSizeVal.textContent = this.value + '%';
+            updateAll();
+        });
+        
+        btnBold.addEventListener('click', function() {
+            const start = textInput.selectionStart;
+            const end = textInput.selectionEnd;
+            const text = textInput.value;
+
+            if (start !== end) {
+                const selectedText = text.substring(start, end);
+                // Insere as tags <b> ao redor do texto selecionado
+                textInput.value = text.substring(0, start) + '<b>' + selectedText + '</b>' + text.substring(end);
+                
+                // Mantém o foco e a seleção no local correto após aplicar
+                textInput.focus();
+                textInput.selectionStart = start + 3; // +3 por causa do <b>
+                textInput.selectionEnd = end + 3;
+                
+                updateAll();
+            } else {
+                alert('Por favor, selecione com o mouse a parte do texto que deseja colocar em negrito primeiro.');
+            }
+        });
 
         resetBtn.addEventListener('click', function() {
             textInput.value = DEFAULT_TEXT;
             materiaInput.value = '';
             materiaFileName.textContent = 'Nenhuma imagem';
             materiaDataUrl = null;
+            textSizeSlider.value = 100;
+            textSizeVal.textContent = '100%';
             updateAll();
             statusMsg.classList.add('show');
             statusText.textContent = 'Restaurado';
@@ -879,7 +958,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com perfil 4x maior e rodapé com espaço em branco');
+        console.log('Gerador com ajuste de tamanho e botão de negrito');
     })();
 </script>
 
