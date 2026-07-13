@@ -560,6 +560,70 @@
         input[type=range] {
             accent-color: #1a5fb4;
         }
+
+        /* ===== RESPONSIVIDADE (MOBILE) ===== */
+        @media (max-width: 600px) {
+            body {
+                padding: 0.5rem;
+            }
+            .app {
+                padding: 1.2rem 0.8rem;
+                border-radius: 1rem;
+            }
+            h1 {
+                font-size: 1.25rem;
+                justify-content: center;
+                flex-wrap: wrap;
+                text-align: center;
+            }
+            .control-panel {
+                padding: 1.2rem 0.8rem;
+            }
+            .btn-group, .btn-download-group {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .btn {
+                width: 100%;
+            }
+            .toolbar {
+                justify-content: center;
+            }
+            .btn-format {
+                flex: 1;
+                padding: 0.5rem 0;
+                text-align: center;
+            }
+            .btn-bold {
+                width: 100%;
+                margin-top: 0.4rem;
+                margin-left: 0;
+                text-align: center;
+            }
+            .file-upload {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+            }
+            .file-upload input[type="file"]::file-selector-button {
+                width: 100%;
+                margin-right: 0;
+            }
+            .file-upload span[style*="margin-left: auto"] {
+                margin-left: 0 !important;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .profile-size-info {
+                text-align: center;
+                display: block;
+            }
+            .card-body {
+                padding: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1070,7 +1134,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com formatação e salvamento automático local');
+        console.log('Gerador com responsividade para mobile');
     })();
 </script>
 
