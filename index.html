@@ -1011,14 +1011,43 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
                     height: container.scrollHeight
                 });
 
-                const link = document.createElement('a');
-                link.download = filename;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+                const dataUrl = canvas.toDataURL('image/png');
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-                statusMsg.classList.add('show');
-                statusText.textContent = `✅ ${filename} baixado! (${container.scrollWidth}x${container.scrollHeight})`;
-                setTimeout(() => statusMsg.classList.remove('show'), 3000);
+                const doFallback = () => {
+                    const link = document.createElement('a');
+                    link.download = filename;
+                    link.href = dataUrl;
+                    link.click();
+                    
+                    statusMsg.classList.add('show');
+                    statusText.textContent = `✅ ${filename} baixado!`;
+                    setTimeout(() => statusMsg.classList.remove('show'), 3000);
+                };
+
+                // iOS: Chama a aba de compartilhamento que tem a opção "Salvar Imagem"
+                if (isIOS && navigator.canShare) {
+                    canvas.toBlob(async (blob) => {
+                        const file = new File([blob], filename, { type: 'image/png' });
+                        if (navigator.canShare({ files: [file] })) {
+                            try {
+                                await navigator.share({
+                                    files: [file]
+                                });
+                                statusMsg.classList.add('show');
+                                statusText.textContent = `✅ Selecione "Salvar Imagem"!`;
+                                setTimeout(() => statusMsg.classList.remove('show'), 3000);
+                            } catch (e) {
+                                // Se o usuário cancelar ou a API falhar, não fazemos nada (ou usamos fallback)
+                                if (e.name !== 'AbortError') doFallback();
+                            }
+                        } else {
+                            doFallback();
+                        }
+                    }, 'image/png');
+                } else {
+                    doFallback();
+                }
 
             } catch (error) {
                 console.error('Erro:', error);
@@ -1134,7 +1163,7 @@ Ao longo do dia, a programação foi marcada por inaugurações, anúncios de in
             checkProfile();
         }, 200);
 
-        console.log('Gerador com responsividade para mobile');
+        console.log('Gerador com responsividade para mobile e suporte a galeria iOS');
     })();
 </script>
 
